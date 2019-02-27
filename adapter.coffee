@@ -56,7 +56,7 @@ class Zulip extends Adapter
         # Zulip autocompleted @-mentions look like "@**Hubot**". Remove
         # the stars so hubot sees it.
         name = @robot.name.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
-        @mention_regex = new RegExp("^[@]\\*\\*(#{name})\\*\\*", 'i')
+        @mention_regex = new RegExp("^[@]\\*?\\*?(#{name})(\\|\\d+)?\\*?\\*?", 'i')
 
         @zulip.on 'message', (msg) =>
             return if msg.sender_email is @zulip.email
